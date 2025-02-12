@@ -4,6 +4,7 @@ import LeftNavbar from "../../components/layout-components/LeftNavbar";
 import RightNavbar from "../../components/layout-components/RightNavbar";
 import LatestNews from "./../../components/LatestNews/LatestNews";
 import NavBar from "./../../components/NavBar/NavBar";
+import HomeNewsMiddleContainer from "../../components/layout-components/HomeNewsMiddleContainer";
 
 const HomeLayout = () => {
   return (
@@ -26,10 +27,10 @@ const HomeLayout = () => {
           <LeftNavbar></LeftNavbar>
         </div>
         <div className="middle-container col-span-6 border-2 border-gray-200">
-          {/* <h2>Middle container</h2> */}
-          <h2 className="font-semibold  text-[#403F3F] mb-5 text-[20px] pl-5">Dragon News Home </h2>
-          <Outlet></Outlet>
+         <HomeNewsMiddleContainer></HomeNewsMiddleContainer>
+        <Outlet></Outlet>
         </div>
+
         {/* right sided layout */}
         <div className="right-container right col-span-3 border-2 border-gray-200">
           {/* <h2>right container</h2> */}
