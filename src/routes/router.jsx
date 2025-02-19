@@ -3,6 +3,10 @@ import HomeLayout from "../layout/HomeLayout/HomeLayout";
 import Career from "../components/Career/Career";
 import About from "../components/About/About";
 import CategoryNews from './../pages/CategoryNews';
+import UserLogin from "../pages/UserLogin";
+import LoginLayout from "../layout/LoginLayout/LoginLayout";
+import UserRegister from "../pages/UserRegister";
+import UserDashboard from "../components/UserDashboard/UserDashboard";
 
 
 const router = createBrowserRouter([
@@ -13,8 +17,6 @@ const router = createBrowserRouter([
             {
                 path:'/',
                 element:<Navigate to={`/category/01`}></Navigate>
-                
-
             },
             {
                 path:'/category/:id',
@@ -28,8 +30,22 @@ const router = createBrowserRouter([
         element:<div>News layout</div>
     },
     {
-        path:'/auth',
-        element:<div>Login auth layout</div>
+        path:'auth',
+        element:<LoginLayout></LoginLayout>,
+        children:[
+            {
+                path:'',
+                element:<UserLogin></UserLogin>
+            },
+            {
+                path:'register',
+                element:<UserRegister></UserRegister>
+            },
+            {
+                path:'userDashboard',
+                element:<UserDashboard></UserDashboard>
+            }
+        ]
     },
     {
         path:'*',
