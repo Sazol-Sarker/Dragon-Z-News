@@ -40,7 +40,7 @@ const NewsDetails = ({ news }) => {
           <div className="mb-4">
             <h2 className="text-[16px] font-semibold">{name}</h2>
             <p className="text-[#706F6F]  text-[14px]">
-              {published_date.split(" ")[0]}
+              {published_date?published_date.split(" ")[0]:`Null`}
             </p>
           </div>
         </div>
