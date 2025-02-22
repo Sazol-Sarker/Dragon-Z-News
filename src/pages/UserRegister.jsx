@@ -5,21 +5,21 @@ const UserRegister = () => {
   // handleRegisterForm
   const handleRegisterForm=(e)=>{
     e.preventDefault();
-    console.log("logging=> ",e.target);
+    // console.log("logging=> ",e.target);
       const userName=e.target.userName.value ;
       const userPhotoUrl=e.target.photoUrl.value ;
       const userEmail=e.target.userEmail.value ;
       const userPassword=e.target.userPassword.value ;
-      console.log(userName,userPhotoUrl,userEmail,userPassword);
+      // console.log(userName,userPhotoUrl,userEmail,userPassword);
       // sign up data validation
 
       // user data sending to firebase db
       // creating user...
       createUserWithEmailAndPassword(auth,userEmail,userPassword)
       .then(result=>{
-        console.log("Success! User created!");
+        // console.log("Success! User created!");
       }).catch(error=>{
-        console.log("Error=>",error.code,error.msg);
+        // console.log("Error=>",error.code,error.msg);
       })
 
       // clear the form 

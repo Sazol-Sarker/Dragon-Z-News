@@ -8,7 +8,7 @@ const CategoryNews = () => {
   const newsArray=data.data;
   //   console.log(typeof newsArray,newsArray);
   //   console.log(typeof data);
-  console.log("NewsArray=> ",newsArray.length)
+  // console.log("NewsArray=> ",newsArray.length)
   if(!newsArray.length) return <p className="text-center text-red-500 text-2xl ">No data in {` Category ${newsArray}`}</p> 
   return (
     <div className="m-2 p-2 space-y-4 ">

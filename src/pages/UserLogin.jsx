@@ -11,7 +11,7 @@ const UserLogin = () => {
     e.preventDefault();
     const userEmail = e.target.userEmail.value;
     const userPassword = e.target.userPassword.value;
-    console.log("Sign in data:=> ", userEmail, userPassword);
+    // console.log("Sign in data:=> ", userEmail, userPassword);
 
     //  sign in data validation
 
@@ -19,11 +19,11 @@ const UserLogin = () => {
     signInWithEmailAndPassword(auth, userEmail, userPassword)
       .then((result) => {
         toast("Welcome Adventurer! SuccessFully Logged In!");
-        console.log("Success! Logged in! User details: ", result.user);
+        // console.log("Success! Logged in! User details: ", result.user);
         navigate("userDashboard");
       })
       .catch((error) => {
-        console.log("Error=>", error.code, error.msg);
+        // console.log("Error=>", error.code, error.msg);
       });
 
     // Reset the form

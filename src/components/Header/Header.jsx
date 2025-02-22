@@ -4,7 +4,7 @@ import logo from '../../assets/logo.png'
 const Header = () => {
     const displayDate=moment().format('dddd, MMMM D, YYYY');
     
-    console.log(displayDate);
+    // console.log(displayDate);
     return (
         <div className='flex flex-col items-center justify-center'>
             {/* <h2>Header</h2> */}

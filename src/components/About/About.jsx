@@ -6,7 +6,7 @@ import moment from "moment";
 const About = () => {
   const [showAccordion, setShowAccordion] = useState(false);
   const [duration, setDuration] = useState("xx");
-  console.log(duration, "=> duration");
+  // console.log(duration, "=> duration");
   // calc live site time
   // Calculate live site duration
   useEffect(() => {

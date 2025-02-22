@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 const DetailedNews = () => {
     const {id}=useParams();
     const [newsData,setNewsData]=useState([])
-    console.log("newsData",newsData);
-    console.log("newsData",newsData);
+    // console.log("newsData",newsData);
+    // console.log("newsData",newsData);
     const {image_url,details,thumbnail_url,title}=newsData
     // const {image_url,details,thumbnail_url,title}=newsData
-    console.log(details);
+    // console.log(details);
 
 
     useEffect(()=>{

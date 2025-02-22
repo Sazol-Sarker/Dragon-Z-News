@@ -9,9 +9,9 @@ const SocialLogin = () => {
         const provider=new GoogleAuthProvider();
         signInWithPopup(auth,provider)
         .then(result=>{
-            console.log("Google log in SUCCESS!",result.user);
+            // console.log("Google log in SUCCESS!",result.user);
         }).catch(error=>{
-            console.log("ERROR=> ",error.code,error.msg);
+            // console.log("ERROR=> ",error.code,error.msg);
         })
     }
 // Github
@@ -19,9 +19,9 @@ const handleGithubSignIn=()=>{
     const provider=new GithubAuthProvider();
     signInWithPopup(auth,provider)
     .then(result=>{
-        console.log("Github login success!",result.user);
+        // console.log("Github login success!",result.user);
     }).catch(error=>{
-        console.log("Error=> ",error.code,error.msg);
+        // console.log("Error=> ",error.code,error.msg);
     })
 }
 

@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import LeftNavbar from "../../components/layout-components/LeftNavbar";
 import RightNavbar from "../../components/layout-components/RightNavbar";
@@ -8,6 +8,16 @@ import HomeNewsMiddleContainer from "../../components/layout-components/HomeNews
 import Footer from "../../components/Footer/Footer";
 
 const HomeLayout = () => {
+  // receive all news data (26)
+  const NewsData=useLoaderData();
+  const allNewsData=NewsData.data
+  // console.log("allNewsData",allNewsData);
+  // console.log(typeof allNewsData[0].others_info.is_trending);
+  // filter news data which are trending news
+  // pass the data to marquee bar
+  // console.log(allNewsData.data[0]);
+  const trendingNews=allNewsData.filter(singleNews=> singleNews.others_info.is_trending);
+  // console.log("trendingNews",trendingNews);
   return (
     <div className="font-poppins">
       <title>Dragon-Z-News | Homepage</title>
@@ -16,7 +26,7 @@ const HomeLayout = () => {
         <Header></Header>
         {/* Marquee section */}
         <section className="w-10/12 mx-auto">
-          <LatestNews></LatestNews>
+          <LatestNews trendingNews={trendingNews}></LatestNews>
         </section>
       </header>
       {/* navbar */}
@@ -27,7 +37,7 @@ const HomeLayout = () => {
       <main className="w-10/12 mx-auto mt-4 grid gap-4 md:grid-cols-12">
         <div className="left-container left col-span-3 ">
           {/* <h2>left container</h2> */}
-          <LeftNavbar></LeftNavbar>
+          <LeftNavbar ></LeftNavbar>
         </div>
         <div className="middle-container col-span-6 ">
          <HomeNewsMiddleContainer></HomeNewsMiddleContainer>

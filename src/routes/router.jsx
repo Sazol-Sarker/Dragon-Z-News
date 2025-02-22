@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import HomeLayout from "../layout/HomeLayout/HomeLayout";
-import Career from "../components/Career/Career";
+
 import About from "../components/About/About";
 import CategoryNews from "./../pages/CategoryNews";
 import UserLogin from "../pages/UserLogin";
@@ -9,10 +9,12 @@ import UserRegister from "../pages/UserRegister";
 import UserDashboard from "../components/UserDashboard/UserDashboard";
 import DetailedNewsLayout from "../layout/DetailedNewsLayout/DetailedNewsLayout";
 import DetailedNews from "../components/DetailedNews/DetailedNews";
+import Career from "../pages/Career";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    loader:()=>fetch('https://openapi.programming-hero.com/api/news/category/08'),
     element: <HomeLayout></HomeLayout>,
     children: [
       {
