@@ -31,28 +31,28 @@ const UserLogin = () => {
   };
 
   return (
-    <div className="h-[700ox] w-[700px] mx-auto mt-14 bg-white rounded-md">
+    <div className="my-6  mx-auto mt-14  bg-white  rounded-md">
       {/* daisy ui login form */}
-      <div className="hero min-h-screen w-full  flex flex-col">
-        <h3 className="text-center font-semibold text-[22px] text-[#403F3F] my-4">
+      <div className="hero  w-full  flex flex-col">
+        <h3 className="text-center font-semibold text-[30px] text-[#403F3F] my-4">
           Log in to your account
         </h3>
-        <div className="divider text-[#E7E7E7] w-8/12 mx-auto my-2"></div>
+        <div className="divider text-[#E7E7E7] w-4/5 mx-auto mb-2"></div>
         {/* form body */}
-        <div className="hero-content w-[700px] ">
-          <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <form onSubmit={handleLoginForm} className="card-body">
+        <div className="hero-content w-full ">
+          <div className="card  w-full max-w-lg shrink-0 ">
+            <form onSubmit={handleLoginForm} className="card-body p-2">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text font-semibold text-xl">
-                    Email
+                    Email address
                   </span>
                 </label>
                 <input
                   type="email"
                   name="userEmail"
                   placeholder="Enter your email address"
-                  className="input input-bordered"
+                  className="input input-bordered text-[#9F9F9F] bg-[#F3F3F3] w-full "
                   required
                 />
               </div>
@@ -66,7 +66,7 @@ const UserLogin = () => {
                   type="password"
                   name="userPassword"
                   placeholder="Enter your password"
-                  className="input input-bordered"
+                  className="input input-bordered text-[#9F9F9F] bg-[#F3F3F3] rounded-md w-full"
                   required
                 />
                 {/* <label className="label">
@@ -81,13 +81,12 @@ const UserLogin = () => {
                 </button>
               </div>
               <div className="have-to-register">
-                <p className="text-center">
-                  Don't Have An Account?{" "}
+                <p className="text-center font-semibold">
+                  Don't Have An Account?
                   <Link
-                    to="register"
+                    to="/auth/register"
                     className="text-[#F75B5F] font-semibold text-[16px] "
-                  >
-                    Register
+                  >  &nbsp;Register
                   </Link>
                 </p>
               </div>

@@ -5,6 +5,7 @@ import { IoShareSocialOutline } from "react-icons/io5";
 
 const NewsDetails = ({ news }) => {
   const {
+    _id,
     author,
     category_id,
     details,
@@ -28,9 +29,10 @@ const NewsDetails = ({ news }) => {
   // console.log("processedDetails=> ",processedDetails);
 
   return (
-    <div className="space-y-5 border-2 rounded-md border-slate-300">
+    <div className="mb-7 rounded-md border-2 border-slate-300">
       {/* <h2>News Cateogy id: {category_id}</h2> */}
-      <div className="author-container mx-5 flex items-center justify-between  border-2 border-blue-300 bg-gray-100">
+      
+      <div className="author-container px-5 flex items-center justify-between bg-gray-100">
         <div className="author-info flex items-center justify-center gap-2 ">
           <img
             src={img}
@@ -60,7 +62,7 @@ const NewsDetails = ({ news }) => {
         {/* <p>{details}</p> */}
         <p className="text-[#706F6F] text-md">{processedDetails + "..."}</p>
         {/* button */}
-        <Link className="text-[16px] font-semibold text-[#FF8C47]" to="">
+        <Link className="text-[16px] font-semibold text-[#FF8C47]" to={`/news/${_id}`}>
           Read more
           {/* <button className="btn text-[#FF8C47]">Read more</button> */}
         </Link>
@@ -77,7 +79,7 @@ const NewsDetails = ({ news }) => {
                 name="rating-4"
                 className="mask mask-star-2 bg-[#FF8C47]"
                 defaultChecked
-              />
+                />
               <input
                 type="radio"
                 name="rating-4"
@@ -107,6 +109,9 @@ const NewsDetails = ({ news }) => {
           </div>
         </div>
       </div>
+
+   
+
     </div>
   );
 };

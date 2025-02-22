@@ -5,12 +5,13 @@ import SocialLogin from "../SocialLogin/SocialLogin";
 
 const RightNavbar = () => {
   return (
-    <div className="pl-2  space-y-7">
+    <div className="pl-2 mb-5 space-y-7">
       
       <SocialLogin></SocialLogin>
       <FindUs></FindUs>
       <QZoneGallery></QZoneGallery>
       <Advertise></Advertise>
+    
 
     </div>
   );

@@ -2,3 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+a.active{
+    background: #E7E7E7;
+}
