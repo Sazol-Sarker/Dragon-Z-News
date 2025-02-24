@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa6";
 import { CiBookmark } from "react-icons/ci";
 import { IoShareSocialOutline } from "react-icons/io5";
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import { toast } from "react-toastify";
 
 const NewsDetails = ({ news }) => {
   const {
@@ -17,6 +20,10 @@ const NewsDetails = ({ news }) => {
   } = news;
   // console.log(news);
   const { img, name, published_date } = author;
+
+  // reade context api user
+  const { user } = useContext(AuthContext);
+
   // if rating start n\has any relation with rating, try here
   // const {number}=rating;
   // const starToBlink=Math.ceil(number);
@@ -28,10 +35,32 @@ const NewsDetails = ({ news }) => {
   const processedDetails = words.slice(0, splitIdx).join(" ");
   // console.log("processedDetails=> ",processedDetails);
 
+
+  // handleBookmark
+  const handleBookmark=()=>{
+    if(user)
+    {
+      toast("Yeah! Bookmark done!");
+    }
+    else{
+      toast("Login before Bookmark!");
+    }
+  }
+
+  const handleShareToSocial=()=>{
+    if(user)
+      {
+        toast("Yeah! Bookmark done!");
+      }
+      else{
+        toast("Login before sharing!");
+      }
+  }
+
   return (
     <div className="mb-7 rounded-md border-2 border-slate-300">
       {/* <h2>News Cateogy id: {category_id}</h2> */}
-      
+
       <div className="author-container px-5 flex items-center justify-between bg-gray-100">
         <div className="author-info flex items-center justify-center gap-2 ">
           <img
@@ -42,14 +71,20 @@ const NewsDetails = ({ news }) => {
           <div className="mb-4">
             <h2 className="text-[16px] font-semibold">{name}</h2>
             <p className="text-[#706F6F]  text-[14px]">
-              {published_date?published_date.split(" ")[0]:`Null`}
+              {published_date ? published_date.split(" ")[0] : `Null`}
             </p>
           </div>
         </div>
         <div className="bookmark-link flex gap-2 text-2xl pr-5 text-[#706F6F]">
           {/* functions remain to add */}
+          <div onClick={handleBookmark} className="btn-outline">
+
           <CiBookmark />
+          </div>
+          <div onClick={handleShareToSocial} className="btn-outline">
+            
           <IoShareSocialOutline />
+          </div>
         </div>
       </div>
       <div className="news-body px-5">
@@ -62,7 +97,10 @@ const NewsDetails = ({ news }) => {
         {/* <p>{details}</p> */}
         <p className="text-[#706F6F] text-md">{processedDetails + "..."}</p>
         {/* button */}
-        <Link className="text-[16px] font-semibold text-[#FF8C47]" to={`/news/${_id}`}>
+        <Link
+          className="text-[16px] font-semibold text-[#FF8C47]"
+          to={`/news/${_id}`}
+        >
           Read more
           {/* <button className="btn text-[#FF8C47]">Read more</button> */}
         </Link>
@@ -79,7 +117,7 @@ const NewsDetails = ({ news }) => {
                 name="rating-4"
                 className="mask mask-star-2 bg-[#FF8C47]"
                 defaultChecked
-                />
+              />
               <input
                 type="radio"
                 name="rating-4"
@@ -109,9 +147,6 @@ const NewsDetails = ({ news }) => {
           </div>
         </div>
       </div>
-
-   
-
     </div>
   );
 };

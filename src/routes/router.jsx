@@ -10,11 +10,14 @@ import UserDashboard from "../components/UserDashboard/UserDashboard";
 import DetailedNewsLayout from "../layout/DetailedNewsLayout/DetailedNewsLayout";
 import DetailedNews from "../components/DetailedNews/DetailedNews";
 import Career from "../pages/Career";
+import PrivateRoute from "../PrivateRoutes/PrivateRoute";
+import ErrorPage from "../components/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     loader:()=>fetch('https://openapi.programming-hero.com/api/news/category/08'),
+    errorElement:<ErrorPage></ErrorPage>,
     element: <HomeLayout></HomeLayout>,
     children: [
       {
@@ -56,7 +59,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/auth/userDashboard",
-        element: <UserDashboard></UserDashboard>,
+        element: <PrivateRoute><UserDashboard></UserDashboard></PrivateRoute>,
       },
     ],
   },

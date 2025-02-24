@@ -1,25 +1,30 @@
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { FaGithub, FaGoogle } from "react-icons/fa6";
-import auth from './../../firebase/firebase.config';
-import { GithubAuthProvider } from "firebase/auth";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const SocialLogin = () => {
+    
+    const {googleSignIn,githubSignIn,setUser}=useContext(AuthContext)
 // Google
     const handleGoogleSignIN=()=>{
-        const provider=new GoogleAuthProvider();
-        signInWithPopup(auth,provider)
+       
+        googleSignIn()
         .then(result=>{
-            // console.log("Google log in SUCCESS!",result.user);
+          const  {uid,displayName="Demo User",email,photoURL}=result.user
+          setUser({uid,displayName,email,photoURL});
+          console.log("done! Google log in SUCCESS!",result.user);
         }).catch(error=>{
             // console.log("ERROR=> ",error.code,error.msg);
         })
     }
 // Github
 const handleGithubSignIn=()=>{
-    const provider=new GithubAuthProvider();
-    signInWithPopup(auth,provider)
+    
+    githubSignIn()
     .then(result=>{
-        // console.log("Github login success!",result.user);
+        const  {uid,displayName,email,photoURL}=result.user
+          setUser({uid,displayName,email,photoURL});
+        console.log("Github login success!",result.user);
     }).catch(error=>{
         // console.log("Error=> ",error.code,error.msg);
     })

@@ -1,10 +1,16 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import auth from "../firebase/firebase.config";
 import { toast } from "react-toastify";
+import { useContext, useState } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const UserLogin = () => {
+  // state hooks for log in error
+  const [loginError, setLoginError] = useState({});
+  // hook for page navigating
   const navigate = useNavigate();
+  // context data using: sign in func
+  const { logInUserByEmailAndPasswordFromAuthProvider } =
+    useContext(AuthContext);
 
   // handleLoginForm
   const handleLoginForm = (e) => {
@@ -16,18 +22,17 @@ const UserLogin = () => {
     //  sign in data validation
 
     // send data to firebase sdk for validation & LOGIN
-    signInWithEmailAndPassword(auth, userEmail, userPassword)
+    logInUserByEmailAndPasswordFromAuthProvider(userEmail, userPassword)
       .then((result) => {
-        toast("Welcome Adventurer! SuccessFully Logged In!");
+        toast(`Welcome back ${userEmail}! SuccessFully Logged In!`);
         // console.log("Success! Logged in! User details: ", result.user);
+        // Reset the form
+        e.target.reset();
         navigate("userDashboard");
       })
       .catch((error) => {
         // console.log("Error=>", error.code, error.msg);
       });
-
-    // Reset the form
-    e.target.reset();
   };
 
   return (
@@ -86,7 +91,9 @@ const UserLogin = () => {
                   <Link
                     to="/auth/register"
                     className="text-[#F75B5F] font-semibold text-[16px] "
-                  >  &nbsp;Register
+                  >
+                    {" "}
+                    &nbsp;Register
                   </Link>
                 </p>
               </div>
