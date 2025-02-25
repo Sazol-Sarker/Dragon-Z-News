@@ -30,7 +30,7 @@ const NewsDetails = ({ news, newsUrl }) => {
   const { img, name, published_date } = author;
 
   // reade context api user
-  const { user } = useContext(AuthContext);
+  const { user, bookMarkedNews, setBookMarkedNews } = useContext(AuthContext);
 
   // if rating start n\has any relation with rating, try here
   // const {number}=rating;
@@ -50,12 +50,14 @@ const NewsDetails = ({ news, newsUrl }) => {
       toast("Please login before Bookmark!");
       return;
     }
+    const newBookMarkedNews=[...bookMarkedNews,news]
+    setBookMarkedNews(newBookMarkedNews)
     setBookmarked(!bookmarked);
     !bookmarked ? toast("Yeah! Bookmark done!") : toast("Bookmark Removed!");
   };
 
   // async ()
-  const handleShareToSocial =() => {
+  const handleShareToSocial = () => {
     if (!user) {
       setIsSharing(false);
       setIsCopied(false);
@@ -73,9 +75,8 @@ const NewsDetails = ({ news, newsUrl }) => {
     setIsCopied(!isCopied);
     // if(!isSharing)
     toast("Yeah! SHaring Link !");
-    if(isCopied)
-    {
-      toast(newsUrl)
+    if (isCopied) {
+      toast(newsUrl);
     }
     // else
     // toast("Please login before sharing!");
@@ -116,9 +117,9 @@ const NewsDetails = ({ news, newsUrl }) => {
             )}
           </button>
           <button onClick={handleShareToSocial} className="">
-          <IoShareSocialOutline className={isCopied?"text-green-600 font-bold":""} />
-            
-           
+            <IoShareSocialOutline
+              className={isCopied ? "text-green-600 font-bold" : ""}
+            />
           </button>
         </div>
       </div>

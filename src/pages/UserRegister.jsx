@@ -6,11 +6,12 @@ import ErrorList from "../ErrorList/ErrorList";
 const UserRegister = () => {
   // Password validation state hook for  error
   const [registrationPwdError,setRegistrationPwdError]=useState([])
+  const [checkBoxCLicked,setCheckBoxCLicked]=useState(false)
   // get data+func from context api
   const {
     createUserByEmailAndPasswordFromAuthProvider,
     // validateSignupPasswordByFirebase,
-    verifyUserEmail
+    verifyUserEmail,updateUserInfo
   } = useContext(AuthContext);
 
   // page navigate hook
@@ -24,6 +25,8 @@ const UserRegister = () => {
     const userPhotoUrl = e.target.photoUrl.value;
     const userEmail = e.target.userEmail.value;
     const userPassword = e.target.userPassword.value;
+
+   
     // console.log(userName,userPhotoUrl,userEmail,userPassword);
     // sign up data validation
 
@@ -50,12 +53,28 @@ const UserRegister = () => {
     // if(haltReg)
     //   return
 
+    if(!checkBoxCLicked)
+    {
+      toast('Please accept Terms & Conditions!')
+      return
+    }
     // user data sending to firebase db
     // creating user...
     createUserByEmailAndPasswordFromAuthProvider(userEmail, userPassword)
       .then((result) => {
         toast(`User: ${userName} Created successfully! `);
         e.target.reset();
+        const updateUserData={userName,userPhotoUrl}
+        // update user info
+        updateUserInfo(updateUserData)
+        .then(()=>{
+          toast('Profile updated')
+        })
+        .catch(error=>{
+          alert('Profile update failed')
+        })
+
+
         // tell user to verify email
         // verifyUserEmail()
         // .then(()=>{
@@ -139,9 +158,9 @@ const UserRegister = () => {
             </div>
             <div className="form-control  term-condition">
               <label className="label cursor-pointer justify-start space-x-1">
-                <input type="checkbox" className="checkbox" />
+                <input onClick={()=>setCheckBoxCLicked(!checkBoxCLicked)}  type="checkbox" className="checkbox" />
                 <span className="label-text">
-                  Accept
+                  Accept &nbsp;
                   <span className="font-semibold">Term & Conditions</span>
                 </span>
               </label>

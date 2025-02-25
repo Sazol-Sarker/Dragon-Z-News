@@ -1,9 +1,12 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 
 const LoginLayout = () => {
+    const location = useLocation();  // Get the current location
+    console.log("location=>",location);
+    const isDashboard = location.pathname.includes('/auth/userDashboard');
     return (
         <div className="bg-base-200 min-h-screen font-poppins flex flex-col">
             <title>Authentication page</title>
@@ -13,7 +16,7 @@ const LoginLayout = () => {
             <Header></Header>
             <nav><NavBar navBtn={"Register"} navBtnPath={"/auth/register"}></NavBar></nav>
             </header>
-            <main className="w-6/12 mx-auto flex-grow">
+            <main className={`mx-auto flex-grow ${isDashboard?"w-full":"w-6/12"}`}>
             <Outlet></Outlet>
             </main>
             <footer className="mt-auto mb-5 w-full ">

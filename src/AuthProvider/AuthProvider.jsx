@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 
@@ -16,6 +17,7 @@ const AuthProvider = ({ children }) => {
   // store user info to use any where
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [bookMarkedNews,setBookMarkedNews]=useState([])
 
   console.log("user in auth provider===> ", user);
 
@@ -72,6 +74,13 @@ const AuthProvider = ({ children }) => {
     
     return signOut(auth);
   };
+
+  // Update a user's profile info
+  const updateUserInfo=(updateUserData)=>{
+
+    return updateProfile(auth.currentUser,updateUserData);
+  }
+
   
   // Email verification
   const verifyUserEmail = () => {
@@ -98,9 +107,12 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     user,
     setUser,
+    bookMarkedNews,
+    setBookMarkedNews,
     loading,
     createUserByEmailAndPasswordFromAuthProvider,
     logInUserByEmailAndPasswordFromAuthProvider,
+    updateUserInfo,
     // validateSignupPasswordByFirebase,
     logOutUser,
     googleSignIn,
