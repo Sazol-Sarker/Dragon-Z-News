@@ -2,11 +2,19 @@ import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa6";
 import { CiBookmark } from "react-icons/ci";
 import { IoShareSocialOutline } from "react-icons/io5";
-import { useContext } from "react";
+import { BsFillBookmarkStarFill } from "react-icons/bs";
+
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { toast } from "react-toastify";
 
-const NewsDetails = ({ news }) => {
+const NewsDetails = ({ news, newsUrl }) => {
+  // hooks for bookmark, SHare btn press
+  const [bookmarked, setBookmarked] = useState(false);
+  const [isSharing, setIsSharing] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+  // Console.log("bookmark, isSharing", bookmarked, isSharing);
+  // console.log("newsUrl=>", newsUrl);
   const {
     _id,
     author,
@@ -35,27 +43,50 @@ const NewsDetails = ({ news }) => {
   const processedDetails = words.slice(0, splitIdx).join(" ");
   // console.log("processedDetails=> ",processedDetails);
 
-
   // handleBookmark
-  const handleBookmark=()=>{
-    if(user)
-    {
-      toast("Yeah! Bookmark done!");
+  const handleBookmark = () => {
+    if (!user) {
+      setBookmarked(false);
+      toast("Please login before Bookmark!");
+      return;
     }
-    else{
-      toast("Login before Bookmark!");
-    }
-  }
+    setBookmarked(!bookmarked);
+    !bookmarked ? toast("Yeah! Bookmark done!") : toast("Bookmark Removed!");
+  };
 
-  const handleShareToSocial=()=>{
-    if(user)
-      {
-        toast("Yeah! Bookmark done!");
-      }
-      else{
-        toast("Login before sharing!");
-      }
-  }
+  // async ()
+  const handleShareToSocial =() => {
+    if (!user) {
+      setIsSharing(false);
+      setIsCopied(false);
+
+      toast("Please login before sharing!");
+      // try {
+      //   await navigator.clipboard.writeText(newsUrl);
+      //   setIsCopied(true);
+      // } catch (err) {
+      //   console.error("Failed to copy:", err);
+      // }
+      return;
+    }
+    setIsSharing(!isSharing);
+    setIsCopied(!isCopied);
+    // if(!isSharing)
+    toast("Yeah! SHaring Link !");
+    if(isCopied)
+    {
+      toast(newsUrl)
+    }
+    // else
+    // toast("Please login before sharing!");
+  };
+
+  // useEffect(() => {
+  //   if (isCopied) {
+  //     const timer = setTimeout(() => setIsCopied(false), 2000);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [isCopied]);
 
   return (
     <div className="mb-7 rounded-md border-2 border-slate-300">
@@ -75,16 +106,20 @@ const NewsDetails = ({ news }) => {
             </p>
           </div>
         </div>
+        {/* functions remain to add */}
         <div className="bookmark-link flex gap-2 text-2xl pr-5 text-[#706F6F]">
-          {/* functions remain to add */}
-          <div onClick={handleBookmark} className="btn-outline">
-
-          <CiBookmark />
-          </div>
-          <div onClick={handleShareToSocial} className="btn-outline">
+          <button onClick={handleBookmark} className="">
+            {bookmarked ? (
+              <BsFillBookmarkStarFill className="text-teal-400" />
+            ) : (
+              <CiBookmark />
+            )}
+          </button>
+          <button onClick={handleShareToSocial} className="">
+          <IoShareSocialOutline className={isCopied?"text-green-600 font-bold":""} />
             
-          <IoShareSocialOutline />
-          </div>
+           
+          </button>
         </div>
       </div>
       <div className="news-body px-5">

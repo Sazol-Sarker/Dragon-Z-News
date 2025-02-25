@@ -8,7 +8,7 @@ const NavBar = ({ navBtn = "Login", navBtnPath = "/auth" }) => {
   const { user, logOutUser, setLoading } = useContext(AuthContext);
   // console.log("In navbar-> user=> ",user.email);
   // const {email,displayName,photoURL}=user||{email:"john@doe.com"}
-  console.log("user in NavbAr", user);
+  // console.log("user in NavbAr", user);
 
   // Safe destructuring with fallback values
   const email = user?.email || "";
@@ -35,7 +35,7 @@ const NavBar = ({ navBtn = "Login", navBtnPath = "/auth" }) => {
         navigate("/auth");
       })
       .catch((error) => {
-        console.error("Error during sign out:", error.message);
+        // console.error("Error during sign out:", error.message);
         setLoading(false); // Ensure loading is turned off in case of error
       });
   };

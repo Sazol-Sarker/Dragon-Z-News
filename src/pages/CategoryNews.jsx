@@ -15,7 +15,9 @@ const CategoryNews = () => {
       {/* <h2>Category News</h2> */}
       {/* loop over news array*/}
       {
-        newsArray.map((news,idx)=><NewsDetails key={idx} news={news}></NewsDetails>)
+        newsArray.map((news,idx)=><NewsDetails key={idx}
+        newsUrl={`https://openapi.programming-hero.com/api/news/${idx}`}
+        news={news}></NewsDetails>)
       }
     </div>
   );
