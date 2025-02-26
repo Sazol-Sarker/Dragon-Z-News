@@ -5,6 +5,7 @@ import BookMarkedNews from "../BookMarkedNews/BookMarkedNews";
 
 const UserDashboard = () => {
   const { user } = useContext(AuthContext);
+  console.log(user);
   const { uid, displayName, email, photoURL } = user;
 
   return (

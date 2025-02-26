@@ -39,7 +39,9 @@ const NewsDetails = ({ news, newsUrl }) => {
   // processing post description {details} , showing 60% word content, so that READ MORE button makes sense
 
   const words = details.split(" ");
-  const splitIdx = Math.ceil(words.length * 0.75);
+  const  showWords= Math.ceil(words.length * 0.75);
+  // Restrict showing more than 100 words
+  const splitIdx =Math.min(showWords,100)
   const processedDetails = words.slice(0, splitIdx).join(" ");
   // console.log("processedDetails=> ",processedDetails);
 
@@ -50,10 +52,18 @@ const NewsDetails = ({ news, newsUrl }) => {
       toast("Please login before Bookmark!");
       return;
     }
-    const newBookMarkedNews=[...bookMarkedNews,news]
-    setBookMarkedNews(newBookMarkedNews)
-    setBookmarked(!bookmarked);
-    !bookmarked ? toast("Yeah! Bookmark done!") : toast("Bookmark Removed!");
+    if(bookMarkedNews.includes(news))
+    {
+      /************NOT WORKING -> duplication happens from home to dash going & coming */
+      toast("Already Bookmarked!")
+    }
+    else{
+
+      const newBookMarkedNews=[...bookMarkedNews,news]
+      setBookMarkedNews(newBookMarkedNews)
+      setBookmarked(!bookmarked);
+      !bookmarked ? toast("Yeah! Bookmark done!") : toast("Bookmark Removed!");
+    }
   };
 
   // async ()

@@ -4,8 +4,8 @@ import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 
 const LoginLayout = () => {
-    const location = useLocation();  // Get the current location
-    console.log("location=>",location);
+    const location = useLocation();  // Get the current location route
+    // console.log("location=>",location);
     const isDashboard = location.pathname.includes('/auth/userDashboard');
     return (
         <div className="bg-base-200 min-h-screen font-poppins flex flex-col">

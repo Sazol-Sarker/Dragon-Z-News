@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -18,6 +19,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [bookMarkedNews,setBookMarkedNews]=useState([])
+  // const [newsBookmarkBtn,setNewsBookmarkBtn]=
 
   console.log("user in auth provider===> ", user);
 
@@ -82,12 +84,18 @@ const AuthProvider = ({ children }) => {
   }
 
   
-  // Email verification
+  // Email verification=> working -./
   const verifyUserEmail = () => {
     if (auth.currentUser) return sendEmailVerification(auth.currentUser);
   };
+
   // password reset email
+  const handlePassResetEmail=(email)=>{
+    return sendPasswordResetEmail(auth, email)
+
+  }
   
+
   // Observer setup for handling / tracking log in state, reloading problem
   
   // signing by 3rd party provider (Google)
@@ -118,6 +126,7 @@ const AuthProvider = ({ children }) => {
     googleSignIn,
     githubSignIn,
     verifyUserEmail,
+    handlePassResetEmail
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

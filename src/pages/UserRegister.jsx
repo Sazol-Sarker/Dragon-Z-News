@@ -66,6 +66,7 @@ const UserRegister = () => {
         e.target.reset();
         const updateUserData={userName,userPhotoUrl}
         // update user info
+        
         updateUserInfo(updateUserData)
         .then(()=>{
           toast('Profile updated')
@@ -81,6 +82,13 @@ const UserRegister = () => {
         //   toast(`Verify User Email! Email Sent to! ${userEmail}`)
 
         // })
+
+        verifyUserEmail()
+        .then(()=>{
+          toast('Email verification link sent!')
+        })
+
+        
         navigate("/auth");
         // console.log("Success! User created!");
         // clear the form
